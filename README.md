@@ -23,41 +23,40 @@ Efficient Query Classification: Classify user queries into distinct categories s
 This project utilizes a combination of open data sources and APIs to collect, analyze, and generate responses for user inquiries:
 
 ### Financial Datasets for Large Language Models:
-Type: Semantic datasets for training language models on financial contexts.
-Usage: Provides a comprehensive dataset for understanding and generating financial language.
-Access:  [GitHub - Financial Datasets](https://github.com/viratt/financial-datasets)
+- Type: Semantic datasets for training language models on financial contexts.
+- Usage: Provides a comprehensive dataset for understanding and generating financial language.
+- Access:  [GitHub - Financial Datasets](https://github.com/viratt/financial-datasets)
 
 ### Yahoo Finance:
-Type: Stock and financial data.
-Usage: To fetch real-time stock prices, historical data, and company performance information.
-Access: Uses Yahoo Finance](https://finance.yahoo.com)  to connect to the Yahoo Finance API.
+- Type: Stock and financial data.
+- Usage: To fetch real-time stock prices, historical data, and company performance information.
+- Access: Uses Yahoo Finance](https://finance.yahoo.com)  to connect to the Yahoo Finance API.
 
 ###  [Investopedia](https://www.investopedia.com) & [Morningstar](https://www.morningstar.com):
-Type: Financial articles, product information, and educational resources.
-Usage: To build the knowledge base by extracting descriptions of investment products and providing detailed explanations.
-Access: Data is collected by scraping or extracting relevant information to generate accurate responses to customer inquiries.
+- Type: Financial articles, product information, and educational resources.
+- Usage: To build the knowledge base by extracting descriptions of investment products and providing detailed explanations.
+- Access: Data is collected by scraping or extracting relevant information to generate accurate responses to customer inquiries.
 
 ### Kaggle Financial Datasets:
-Examples:
--[Complete Financial Analysis](https://www.kaggle.com/code/prayankkul/complete-financial-analysis): Provides a dataset for detailed financial analysis.
--[Bank Customer Complaints](https://www.kaggle.com/datasets/taeefnajib/bank-customer-complaints): A dataset of customer complaints for training models in understanding typical customer queries and complaints.
+- [Complete Financial Analysis](https://www.kaggle.com/code/prayankkul/complete-financial-analysis): Provides a dataset for detailed financial analysis.
+- [Bank Customer Complaints](https://www.kaggle.com/datasets/taeefnajib/bank-customer-complaints): A dataset of customer complaints for training models in understanding typical customer queries and complaints.
 - [Finance Data](https://www.kaggle.com/datasets/nitindatta/finance-data): Contains various types of financial data useful for developing knowledge about different financial products.
-Usage: For training classification and similarity models, extracting topics and identifying common complaints.
+- Usage: For training classification and similarity models, extracting topics and identifying common complaints.
 
 ### SEC Database (EDGAR):
-Type: Corporate filings and financial reports.
-Usage: To obtain publicly available financial statements and corporate information for U.S.-based companies.
-Access: Through web scraping or API integration, providing transparency and details for certain financial products.
+- Type: Corporate filings and financial reports.
+- Usage: To obtain publicly available financial statements and corporate information for U.S.-based companies.
+- Access: Through web scraping or API integration, providing transparency and details for certain financial products.
 
 ### Commercial Bank Websites:
-Type: Information on financial products, including investment options, loan products, and financial planning tools.
-Usage: To expand the chatbot’s knowledge base by gathering up-to-date product information directly from banks.
-Access: Data collected from publicly available pages on major commercial banks' websites (e.g., JPMorgan Chase, Bank of America).
+- Type: Information on financial products, including investment options, loan products, and financial planning tools.
+- Usage: To expand the chatbot’s knowledge base by gathering up-to-date product information directly from banks.
+- Access: Data collected from publicly available pages on major commercial banks' websites (e.g., JPMorgan Chase, Bank of America).
 
 ### Video and Image Data for Emotion Analysis:
-Type: Videos of financial analysts and customer service interactions.
-Usage: For training and testing the emotion analysis model to recognize facial expressions indicative of emotions (e.g., excitement, sadness, neutrality).
-Access: Videos can be sourced from Yahoo Money Talk or similar financial news sources, with emotional analysis performed using pre-trained models in DeepFace and OpenCV.
+- Type: Videos of financial analysts and customer service interactions.
+- Usage: For training and testing the emotion analysis model to recognize facial expressions indicative of emotions (e.g., excitement, sadness, neutrality).
+- Access: Videos can be sourced from Yahoo Money Talk or similar financial news sources, with emotional analysis performed using pre-trained models in DeepFace and OpenCV.
 
 ## Project Directory Structure (Tentative)
 
@@ -160,8 +159,9 @@ python app/chatbot.py
 
 **controllers/**: This folder holds controller files for different API endpoints. Each controller corresponds to specific functionality (e.g., handling chat requests, emotion analysis, or analytics).
 - **chat_controller.py**: Manages chat requests, handles NLP pipeline  (keyword extraction, classification, and response generation).
-- ** emotion_controller.py**: Handles video input for emotion detection, passing data to the emotion analysis model.
+- **emotion_controller.py**: Handles video input for emotion detection, passing data to the emotion analysis model.
 - **analytics_controller.py**: Retrieves data required for performance metrics, such as response accuracy, latency, and sentiment distribution, to display on the dashboard..
+
 **routes.py**: Defines all API routes and associates them with respective controllers.
 **chatbot.py**: Core chatbot logic, such as loading models, querying the knowledge base, and generating responses.
 **knowledge_base.py**: Manages knowledge base data, responsible for storing and retrieving FAQ-style responses.
@@ -170,10 +170,10 @@ python app/chatbot.py
 
 ## 2. Frontend (frontend/)
 
--** index.html** : Main HTML file for chatbot interface, where users input questions and view responses.
--** style.css** : Contains CSS styling for chatbot interface elements.
--** app.js** : Manages JavaScript logic for handling user input, making API requests, and updating the UI.
--** assets/** : Static assets like images, icons, or any other front-facing files required by the frontend.
+- **index.html** : Main HTML file for chatbot interface, where users input questions and view responses.
+- **style.css** : Contains CSS styling for chatbot interface elements.
+- **app.js** : Manages JavaScript logic for handling user input, making API requests, and updating the UI.
+- **assets/** : Static assets like images, icons, or any other front-facing files required by the frontend.
 
 ## 3. Server Setup (server.py)
 
