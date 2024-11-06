@@ -1,4 +1,3 @@
-
 # Financial Investment Chatbot Project
 
 ## Project Overview
@@ -201,10 +200,10 @@ This project uses MongoDB to store user queries, knowledge base entries, and emo
 - **Data Visualization (Tentative)**: Matplotlib, D3.js (used in `dashboard.py`)
 
 ## Contributions
-Liu Yuchen
-Siying Xu  
-Wang Pengyi 
-Wang Chuanyue 
-He Yongbin
+- Liu Yuchen
+- Siying Xu  
+- Wang Pengyi 
+- Wang Chuanyue 
+- He Yongbin
 
 
