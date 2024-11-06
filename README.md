@@ -30,7 +30,7 @@ This project utilizes a combination of open data sources and APIs to collect, an
 ### Yahoo Finance:
 - Type: Stock and financial data.
 - Usage: To fetch real-time stock prices, historical data, and company performance information.
-- Access: Uses Yahoo Finance](https://finance.yahoo.com)  to connect to the Yahoo Finance API.
+- Access: Uses [Yahoo Finance](https://finance.yahoo.com)  to connect to the Yahoo Finance API.
 
 ###  [Investopedia](https://www.investopedia.com) & [Morningstar](https://www.morningstar.com):
 - Type: Financial articles, product information, and educational resources.
