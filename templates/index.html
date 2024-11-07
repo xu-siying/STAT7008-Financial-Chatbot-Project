@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestoBot - Your Financial Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>InvestoBot</h1>
+            <p>Your Intelligent Financial Assistant</p>
+        </header>
+
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will be appended here -->
+        </div>
+
+        <div class="chat-input-container">
+            <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off">
+            <button id="sendButton">Send</button>
+            <button id="emotionButton">Emotion Detection</button>
+        </div>
+
+        <!-- Video preview for emotion detection -->
+        <div class="emotion-detection-container" id="emotion-container" style="display: none;">
+            <video id="video" autoplay playsinline></video>
+            <button id="captureButton">Capture Emotion</button>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

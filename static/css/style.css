@@ -1,0 +1,85 @@
+/* General body styling to center the chat window */
+body {
+    font-family: Arial, sans-serif;  /* Change to match your presentation font */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;  /* Light background similar to slide theme */
+    margin: 0;
+}
+
+/* Chat container styling */
+.chat-container {
+    width: 400px;
+    max-width: 90%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid #4A90E2;  /* Accent border for a presentation-style touch */
+}
+
+/* Title styling */
+.chat-container h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Chat box styling */
+#chat-box {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* User and bot message styling */
+.user-message {
+    text-align: right;
+    margin: 5px 0;
+    padding: 8px;
+    background-color: #e0f7fa;  /* Light blue for user messages */
+    border-radius: 10px;
+}
+
+.bot-message {
+    text-align: left;
+    margin: 5px 0;
+    padding: 8px;
+    background-color: #e3f2fd;  /* Light color for bot responses */
+    border-radius: 10px;
+}
+
+/* Input styling */
+#user-input {
+    width: calc(100% - 60px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+/* Send button styling */
+button {
+    padding: 10px 15px;
+    background-color: #4A90E2;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #357ABD;
+}
