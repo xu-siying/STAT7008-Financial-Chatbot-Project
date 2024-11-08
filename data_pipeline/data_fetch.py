@@ -3,7 +3,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import os
-from config import KAGGLE_API_KEY, KAGGLE_USER
+import kagglehub
 
 def get_stock_data(ticker, start_date, end_date):
     """Fetch stock data from Yahoo Finance."""
@@ -13,69 +13,48 @@ def get_stock_data(ticker, start_date, end_date):
     print(f"Stock data for {ticker} saved.")
     return stock_data
 
-def get_jpmorgan_product_data():
-    """Scrape product data from JPMorgan Chase's website."""
-    url = "https://www.jpmorganchase.com/solutions"
+def fetch_newsapi_financial_news(api_key):
+    """Fetch latest finance-related news using NewsAPI."""
+    url = f"https://newsapi.org/v2/everything?q=finance&apiKey={api_key}"
     response = requests.get(url)
-    soup = BeautifulSoup(response.content, "html.parser")
-    products = []
-
-    # Example selector - find product titles and descriptions
-    for product_section in soup.find_all("section", class_="product"):
-        title = product_section.find("h2").get_text(strip=True)
-        description = product_section.find("p").get_text(strip=True)
-        products.append({"title": title, "description": description})
-
-    df = pd.DataFrame(products)
-    df.to_csv("data/raw/jpmorgan_products.csv", index=False)
-    print("JPMorgan product data saved.")
+    data = response.json()
+    articles = [{"title": article["title"], "description": article["description"], "url": article["url"]} for article in data["articles"]]
+    df = pd.DataFrame(articles)
+    df.to_csv("data/raw/newsapi_finance_news.csv", index=False)
+    print("NewsAPI financial news saved.")
     return df
 
-def get_bankofamerica_product_data():
-    """Scrape product data from Bank of America's website."""
-    url = "https://www.bankofamerica.com/deposits/bank-accounts/"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, "html.parser")
-    products = []
-
-    # Example selector - find product titles and descriptions
-    for product_section in soup.find_all("div", class_="product-detail"):
-        title = product_section.find("h3").get_text(strip=True)
-        description = product_section.find("p").get_text(strip=True)
-        products.append({"title": title, "description": description})
-
-    df = pd.DataFrame(products)
-    df.to_csv("data/raw/bankofamerica_products.csv", index=False)
-    print("Bank of America product data saved.")
-    return df
-
-def get_hsbc_product_data():
-    """Scrape product data from HSBC's website."""
-    url = "https://www.us.hsbc.com/checking-accounts/"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, "html.parser")
-    products = []
-
-    # Example selector - find product titles and descriptions
-    for product_section in soup.find_all("div", class_="product"):
-        title = product_section.find("h2").get_text(strip=True)
-        description = product_section.find("p").get_text(strip=True)
-        products.append({"title": title, "description": description})
-
-    df = pd.DataFrame(products)
-    df.to_csv("data/raw/hsbc_products.csv", index=False)
-    print("HSBC product data saved.")
-    return df
-
-def fetch_kaggle_data(dataset_path, file_name):
+def fetch_kaggle_data(dataset_name, file_name):
     """Download a dataset from Kaggle."""
-    kaggle_url = f"https://www.kaggle.com/{dataset_path}/download"
-    headers = {"Authorization": f"Bearer {KAGGLE_API_KEY}"}
+   
+    cache_path = kagglehub.dataset_download(dataset_name)
     
-    response = requests.get(kaggle_url, headers=headers)
-    if response.status_code == 200:
-        with open(f"data/raw/{file_name}", "wb") as f:
-            f.write(response.content)
-        print(f"Kaggle dataset {file_name} downloaded.")
+    # Copy downloaded files to the target directory
+    source_file = os.path.join(cache_path, file_name)
+    target_file = os.path.join("data/raw", file_name)
+    if os.path.exists(source_file):
+        os.rename(source_file, target_file)
+        print(f"Kaggle dataset {file_name} moved to: {target_file}")
     else:
-        print("Error fetching Kaggle data. Ensure API key is correct.")
+        print(f"Error: {file_name} not found in {cache_path}.")
+    
+    
+    return target_file
+
+def fetch_financial_news():
+    """Scrape financial news headlines from CNBC."""
+    url = "https://www.cnbc.com/world/?region=world"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, "html.parser")
+    news_items = []
+    for headline in soup.find_all("a", class_="LatestNews-headline"):
+        title = headline.get_text(strip=True)
+        link = headline.get("href")
+        news_items.append({"title": title, "link": link})
+    df = pd.DataFrame(news_items)
+    df.to_csv("data/raw/financial_news.csv", index=False)
+    print("Financial news data saved.")
+    return df
+
+
+

@@ -1,58 +1,55 @@
-from data_pipeline.data_fetch import (
+# main_data_pipeline.py
+from data_fetch import (
     get_stock_data,
-    get_jpmorgan_product_data,
-    get_bankofamerica_product_data,
-    get_hsbc_product_data,
-    fetch_kaggle_data
+    fetch_newsapi_financial_news,
+    fetch_kaggle_data,
+    fetch_financial_news,
 )
-from data_pipeline.data_preprocessing import preprocess_text
+from data_preprocessing import preprocess_text
+from embedding import embed_and_save_products
 import os
 import pandas as pd
 
 def main():
-    # Fetch and process stock data
+    # Set up directories
+    os.makedirs("data/raw", exist_ok=True)
+    os.makedirs("data/processed", exist_ok=True)
+
+    # Fetch stock data for a given ticker
     ticker = "AAPL"
     stock_data_path = f"data/raw/{ticker}_stock_data.csv"
     if not os.path.exists(stock_data_path):
-        stock_data = get_stock_data(ticker, "2022-01-01", "2022-12-31")
+        get_stock_data(ticker, "2022-01-01", "2022-12-31")
+
+    # Fetch additional Kaggle datasets
+    kaggle_datasets = {
+        "samira1992/bank-loan-intermediate-dataset": "Bank_Personal_Loan_Modelling.csv",
+        "snassimr/data-for-investing-type-prediction": "investing_program_prediction_data.csv",
+        "jacksoncrow/stock-market-dataset": "symbols_valid_meta.csv",
+        "kaggle/us-consumer-finance-complaints": "consumer_complaints.csv"
+    }
+    for dataset, file_name in kaggle_datasets.items():
+        fetch_kaggle_data(dataset, file_name)
+
+    # Fetch financial news and preprocess titles
+    financial_news_path = "data/raw/financial_news.csv"
+    if not os.path.exists(financial_news_path):
+        financial_news = fetch_financial_news()
     else:
-        stock_data = pd.read_csv(stock_data_path)
+        financial_news = pd.read_csv(financial_news_path)
+    financial_news['title'] = financial_news['title'].apply(preprocess_text)
+    financial_news.to_csv("data/processed/financial_news.csv", index=False)
 
-    # Fetch and process JPMorgan products
-    jpmorgan_data_path = "data/raw/jpmorgan_products.csv"
-    if not os.path.exists(jpmorgan_data_path):
-        jpmorgan_products = get_jpmorgan_product_data()
-    else:
-        jpmorgan_products = pd.read_csv(jpmorgan_data_path)
-    jpmorgan_products['description'] = jpmorgan_products['description'].apply(preprocess_text)
+    # Fetch NewsAPI financial news
+    news_api_key = "c5aedc0ebd604efba2247e958a96ff8b"  # replace with your key
+    if news_api_key:
+        newsapi_df = fetch_newsapi_financial_news(news_api_key)
+        newsapi_df['title'] = newsapi_df['title'].apply(preprocess_text)
+        newsapi_df.to_csv("data/processed/newsapi_finance_news.csv", index=False)
 
-    # Fetch and process Bank of America products
-    boa_data_path = "data/raw/bankofamerica_products.csv"
-    if not os.path.exists(boa_data_path):
-        boa_products = get_bankofamerica_product_data()
-    else:
-        boa_products = pd.read_csv(boa_data_path)
-    boa_products['description'] = boa_products['description'].apply(preprocess_text)
-
-    # Fetch and process HSBC products
-    hsbc_data_path = "data/raw/hsbc_products.csv"
-    if not os.path.exists(hsbc_data_path):
-        hsbc_products = get_hsbc_product_data()
-    else:
-        hsbc_products = pd.read_csv(hsbc_data_path)
-    hsbc_products['description'] = hsbc_products['description'].apply(preprocess_text)
-
-    # Fetch and process Kaggle financial data
-    kaggle_data_path = "data/raw/finance_data.csv"
-    if not os.path.exists(kaggle_data_path):
-        fetch_kaggle_data("nitindatta/finance-data", "finance_data.csv")
-    kaggle_data = pd.read_csv(kaggle_data_path)
-
-    # Save processed data
-    jpmorgan_products.to_csv("data/processed/jpmorgan_products.csv", index=False)
-    boa_products.to_csv("data/processed/bankofamerica_products.csv", index=False)
-    hsbc_products.to_csv("data/processed/hsbc_products.csv", index=False)
-    kaggle_data.to_csv("data/processed/processed_kaggle_data.csv", index=False)
+    # Generate embeddings for processed product descriptions and news
+    embed_and_save_products()
+    print("Data fetching, processing, and embedding complete.")
 
 if __name__ == "__main__":
     main()
