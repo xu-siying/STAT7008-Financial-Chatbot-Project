@@ -17,4 +17,4 @@ gunicorn==20.1.0           # Server for production deployment (optional)
 
 # Command to config env, 
 #  
-# pip install transformers deepface flask yfinance kaggle nltk scikit-learn sentence-transformers 
+# pip install transformers deepface flask yfinance kaggle nltk scikit-learn sentence-transformers pipecone sumy textblob

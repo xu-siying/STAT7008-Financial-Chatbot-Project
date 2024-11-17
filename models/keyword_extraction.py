@@ -1,16 +1,16 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
-from gensim.models import Word2Vec, LdaModel
 
-def tfidf_keyword_extraction(documents):
-    vectorizer = TfidfVectorizer(stop_words='english')
-    X = vectorizer.fit_transform(documents)
+def extract_keywords(content, top_n=5):
+    """
+    Extract top N keywords from the content using TF-IDF.
+    
+    content: Text content of the article.
+    top_n: Number of keywords to extract.
+    """
+    # Initialize the vectorizer
+    vectorizer = TfidfVectorizer(stop_words="english", max_features=top_n)
+    tfidf_matrix = vectorizer.fit_transform([content])
     keywords = vectorizer.get_feature_names_out()
-    return keywords
+    return list(keywords)
 
-def word2vec_embedding(documents):
-    model = Word2Vec(documents, vector_size=100, window=5, min_count=1, workers=4)
-    return model
 
-def lda_topic_modeling(documents, num_topics=5):
-    lda_model = LdaModel(documents, num_topics=num_topics)
-    return lda_model

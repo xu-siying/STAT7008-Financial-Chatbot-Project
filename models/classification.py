@@ -1,15 +1,19 @@
-from sklearn.naive_bayes import MultinomialNB
-from transformers import BertTokenizer, BertForSequenceClassification
-import torch
+def categorize_article(content):
+    """
+    Categorize the article based on keywords in its content.
+    
+    content: Text content of the article.
+    Returns: Article category.
+    """
+    categories = {
+        "Investing": ["stocks", "investing", "portfolio", "wealth"],
+        "Savings": ["savings", "budget", "emergency fund"],
+        "Loans": ["loans", "mortgage", "debt", "credit"],
+    }
+    
+    for category, keywords in categories.items():
+        if any(keyword in content.lower() for keyword in keywords):
+            return category
+    return "Uncategorized"
 
-def naive_bayes_classification(X_train, y_train):
-    model = MultinomialNB()
-    model.fit(X_train, y_train)
-    return model
 
-def bert_classification(text):
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-    model = BertForSequenceClassification.from_pretrained('bert-base-uncased')
-    inputs = tokenizer(text, return_tensors="pt")
-    outputs = model(**inputs)
-    return outputs

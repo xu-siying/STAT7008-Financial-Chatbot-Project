@@ -1,9 +1,8 @@
-# 数据库配置 (config.py)
-from pymongo import MongoClient
-
-
-# MongoDB连接
-mongo_client = MongoClient("mongodb://localhost:27017/")
-mongo_db = mongo_client["financial_chatbot"]
-
-
+SECRET_KEY = "your_secret_key"
+SQLALCHEMY_DATABASE_URI = "sqlite:///chatbot.db"
+SESSION_TYPE = "redis"
+SESSION_PERMANENT = False
+SESSION_USE_SIGNER = True
+SESSION_KEY_PREFIX = "chatbot:"
+REDIS_HOST = "localhost"
+REDIS_PORT = 6379
