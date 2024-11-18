@@ -90,7 +90,6 @@ body {
 /* User message styling */
 .user-message {
     text-align: left;
-    margin: 5px 0;
     padding: 8px 15px;
     background-color: #e0f7fa; /* Light blue for user messages */
     border-radius: 10px;
