@@ -1,11 +1,11 @@
-/* General body styling to center the chat window */
+/* General body styling */
 body {
-    font-family: Arial, sans-serif;  /* Change to match your presentation font */
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f9;  /* Light background similar to slide theme */
+    background-color: #f4f4f9;
     margin: 0;
 }
 
@@ -16,8 +16,12 @@ body {
     padding: 20px;
     background-color: #ffffff;
     border-radius: 15px;
+    gap: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-left: 5px solid #4A90E2;  /* Accent border for a presentation-style touch */
+    margin-top: 10px;
+    border-left: 5px solid #4A90E2;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Title styling */
@@ -28,6 +32,7 @@ body {
     margin-bottom: 10px;
     text-align: center;
 }
+
 
 /* Chat box styling */
 #chat-box {
@@ -40,38 +45,88 @@ body {
     margin-bottom: 15px;
     font-size: 14px;
     color: #333;
+    display: flex;
+    flex-direction: column;
 }
 
-/* User and bot message styling */
-.user-message {
+/* User and bot message containers */
+.user-message-container {
+    
+    max-width: 70%;
+    margin-bottom: 15px;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    gap: 2px; 
+}
+
+/* Bot message styling (aligned to the left) */
+.bot-message-container {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    max-width: 80%;
+    word-wrap: break-word;
+   
+}
+
+/* Labels above messages */
+.user-label, .bot-label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.user-label {
+    color: #007bff; /* Blue for user */
     text-align: right;
-    margin: 5px 0;
-    padding: 8px;
-    background-color: #e0f7fa;  /* Light blue for user messages */
-    border-radius: 10px;
 }
 
-.bot-message {
+.bot-label {
+    color: #333; /* Darker for bot */
+    text-align: left;
+}
+
+/* User message styling */
+.user-message {
     text-align: left;
     margin: 5px 0;
-    padding: 8px;
-    background-color: #e3f2fd;  /* Light color for bot responses */
+    padding: 8px 15px;
+    background-color: #e0f7fa; /* Light blue for user messages */
     border-radius: 10px;
+    font-size: 16px;
+    color: #333;
+    max-width: 100%;
+    
+    
+    word-wrap: break-word;
+}
+
+
+.bot-message {
+    
+    background-color: #e1e5ea;
+    color: #333;
+    padding: 10px;
+    border-radius: 12px;
+    max-width: 80%;
+    font-size: 16px;
+    text-align: left;
 }
 
 /* Input styling */
 #user-input {
-    width: calc(100% - 60px);
+    width: calc(100% - 80px);
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 14px;
-    margin-right: 5px;
+    font-size: 16px;
+    resize: none;
 }
 
 /* Send button styling */
 button {
-    padding: 10px 15px;
+    padding: 10px 20px;
     background-color: #4A90E2;
     border: none;
     border-radius: 8px;
@@ -81,5 +136,76 @@ button {
 }
 
 button:hover {
+    background-color: #357ABD;
+}
+
+/* Typing dots animation */
+.spinner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.spinner > span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #007bff;
+    border-radius: 50%;
+    animation: bounce 1.2s infinite ease-in-out;
+}
+
+.spinner > span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.spinner > span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+
+/* Input container styling */
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Input styling */
+#user-input {
+    resize: none;
+    overflow: hidden;
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    max-height: 80px;
+}
+
+/* Send button styling */
+#sendButton {
+    padding: 10px 20px;
+    background-color: #4A90E2;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#sendButton:hover {
     background-color: #357ABD;
 }

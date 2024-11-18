@@ -16,5 +16,5 @@ deepface==0.0.45           # For facial emotion detection (DeepFace)
 gunicorn==20.1.0           # Server for production deployment (optional)
 
 # Command to config env, 
-#  
+# dockers are needed to run to redis server
 # pip install transformers deepface flask yfinance kaggle nltk scikit-learn sentence-transformers pipecone sumy textblob
