@@ -137,8 +137,9 @@ class Chatbot:
         if url == None:
             return (
                 f"Your question about '{query}' is interesting. Unfortunately, "
-                f"I couldn't find detailed information in my knowledge base. "
-                "Could you provide more specifics or try rephrasing your question?"
+                f"I couldn't find detailed information in my knowledge base.\n "
+                "Could you provide more specifics or try rephrasing your question?\n"
+                "You can ask me some questions regards to investment and financial assets."
             )
 
         # Generate a response using GPT-2 with the provided context

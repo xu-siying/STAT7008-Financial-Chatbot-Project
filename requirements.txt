@@ -16,5 +16,6 @@ deepface==0.0.45           # For facial emotion detection (DeepFace)
 gunicorn==20.1.0           # Server for production deployment (optional)
 
 # Command to config env, 
-# dockers are needed to run to redis server
+# docker is needed to run to redis server: docker run --name redis-server -p 6379:6379 -d redis // or use other tools
+
 # pip install transformers deepface flask yfinance kaggle nltk scikit-learn sentence-transformers pipecone sumy textblob
