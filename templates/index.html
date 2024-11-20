@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestoBot - Your Financial Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.3/purify.min.js"></script>
+
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>InvestoBot</h1>
+            <p>Your Intelligent Financial Assistant</p>
+        </header>
+
+        <div class="chat-box" id="chat-box"></div>
+
+        <div class="chat-input-container">
+            <textarea id="user-input" placeholder="Type your message here..." autocomplete="off" rows="2"></textarea>
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
